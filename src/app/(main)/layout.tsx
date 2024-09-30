@@ -1,5 +1,10 @@
-import { ThemeProvider } from "@/provider/theme-provider";
 import { FC, ReactNode } from "react";
+
+import { ColorPrefrencesProvider } from "@/provider/color-preferences";
+import { ThemeProvider } from "@/provider/theme-provider";
+import MainContent from "@/components/main-content";
+import { WebSocketProvider } from "@/provider/web-socket";
+import { QueryProvider } from "@/provider/query-provider";
 
 const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -9,7 +14,13 @@ const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
       enableSystem
       disableTransitionOnChange
     >
-      Main Layout {children}
+      <WebSocketProvider>
+        <ColorPrefrencesProvider>
+          <MainContent>
+            <QueryProvider>{children}</QueryProvider>
+          </MainContent>
+        </ColorPrefrencesProvider>
+      </WebSocketProvider>
     </ThemeProvider>
   );
 };

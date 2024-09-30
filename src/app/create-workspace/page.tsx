@@ -57,7 +57,7 @@ const Step1 = () => {
       />
 
       <Typography
-        text="This will be the name of your Linka workspace - choose something that your team will recognize."
+        text="This will be the name of your workspace - choose something that your team will recognize."
         className="text-neutral-300"
         variant="p"
       />
@@ -99,10 +99,11 @@ const Step2 = () => {
     setIsSubmitting(false);
     if (error?.error) {
       console.log(error);
-      return toast.error("Couldn't create workspace. Please try again.");
+      toast.error("Couldn't create workspace. Please try again.");
+    } else {
+      toast.success("Workspace created successfully");
+      router.push("/");
     }
-    toast.success("Workspace created successfully");
-    router.push("/");
   };
 
   return (

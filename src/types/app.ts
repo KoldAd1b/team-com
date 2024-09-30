@@ -1,6 +1,6 @@
-// import { NextApiResponse } from "next";
-// import { Server as NetServer, Socket } from "net";
-// import { Server as SocketIOServer } from "socket.io";
+import { NextApiResponse } from "next";
+import { Server as NetServer, Socket } from "net";
+import { Server as SocketIOServer } from "socket.io";
 
 export type User = {
   avatar_url: string;
@@ -52,10 +52,10 @@ export type Messages = {
 
 export type MessageWithUser = Messages & { user: User };
 
-// export type SockerIoApiResponse = NextApiResponse & {
-//   socket: Socket & {
-//     server: NetServer & {
-//       io: SocketIOServer;
-//     };
-//   };
-// };
+export type SockerIoApiResponse = NextApiResponse & {
+  socket: Socket & {
+    server: NetServer & {
+      io: SocketIOServer;
+    };
+  };
+};

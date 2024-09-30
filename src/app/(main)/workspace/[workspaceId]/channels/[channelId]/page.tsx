@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 import { getUserData } from "@/actions/get-user-data";
 import { Workspace as UserWorkspace } from "@/types/app";
 import {
-  getCurrentWorksaceData,
   getUserWorkspaceData,
-} from "@/actions/workspaces";
+  getCurrentWorkspaceData,
+} from "@/actions/workspace-actions";
 import { getUserWorkspaceChannels } from "@/actions/get-user-workspace-channels";
 import ChatGroup from "@/components/chat-group";
 
@@ -23,7 +23,7 @@ const ChannelId = async ({
 
   const [userWorkspaceData] = await getUserWorkspaceData(userData.workspaces!);
 
-  const [currentWorkspaceData] = await getCurrentWorksaceData(workspaceId);
+  const [currentWorkspaceData] = await getCurrentWorkspaceData(workspaceId);
 
   const userWorkspaceChannels = await getUserWorkspaceChannels(
     currentWorkspaceData.id,

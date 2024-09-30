@@ -6,7 +6,7 @@ import { addMemberToWorkspace } from "./add-member-workspace";
 import { updateUserWorkspace } from "@/actions/update-user-workspace";
 
 export const getUserWorkspaceData = async (workspaceIds: Array<string>) => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from("workspaces")
@@ -16,8 +16,8 @@ export const getUserWorkspaceData = async (workspaceIds: Array<string>) => {
   return [data, error];
 };
 
-export const getCurrentWorksaceData = async (workspaceId: string) => {
-  const supabase = await createClient();
+export const getCurrentWorkspaceData = async (workspaceId: string) => {
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from("workspaces")
@@ -26,6 +26,7 @@ export const getCurrentWorksaceData = async (workspaceId: string) => {
     .single();
 
   if (error) {
+    console.log(error);
     return [null, error];
   }
 
@@ -57,7 +58,7 @@ export const getCurrentWorksaceData = async (workspaceId: string) => {
 };
 
 export const workspaceInvite = async (inviteCode: string) => {
-  const supabase = await createClient();
+  const supabase = createClient();
   const userData = await getUserData();
 
   const { data, error } = await supabase

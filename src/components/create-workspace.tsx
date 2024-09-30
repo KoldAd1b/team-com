@@ -60,6 +60,7 @@ const CreateWorkspace = () => {
     setIsSubmitting(false);
 
     if (result?.error) {
+      toast.error("Error creating the workspace");
       console.error(result.error);
     }
 

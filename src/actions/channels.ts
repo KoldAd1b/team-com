@@ -12,7 +12,7 @@ export const createChannel = async ({
   name: string;
   userId: string;
 }) => {
-  const supabase = await createClient();
+  const supabase = createClient();
   const userData = await getUserData();
 
   if (!userData) {
@@ -64,7 +64,7 @@ export const createChannel = async ({
 };
 
 export const addChannelToUser = async (userId: string, channelId: string) => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data: addChannelData, error: addChannelError } = await supabase.rpc(
     "update_user_channels",
@@ -96,7 +96,7 @@ const updateWorkspaceChannel = async (
   channelId: string,
   workspaceId: string
 ) => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data: updateWorkspaceData, error: updateWorkspaceError } =
     await supabase.rpc("add_channel_to_workspace", {

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { getUserData } from "@/actions/get-user-data";
 import {
-  getCurrentWorksaceData,
+  getCurrentWorkspaceData,
   getUserWorkspaceData,
 } from "@/actions/workspace-actions";
 import Sidebar from "@/components/sidebar";
@@ -22,7 +22,7 @@ const Workspace = async ({
 
   const [userWorkspaceData] = await getUserWorkspaceData(userData.workspaces!);
 
-  const [currentWorkspaceData] = await getCurrentWorksaceData(workspaceId);
+  const [currentWorkspaceData] = await getCurrentWorkspaceData(workspaceId);
 
   const userWorkspaceChannels = await getUserWorkspaceChannels(
     currentWorkspaceData.id,

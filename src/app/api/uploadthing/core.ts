@@ -1,6 +1,6 @@
-import { getUserData } from "@/actions/get-user-data";
-import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
+import { createUploadthing, type FileRouter } from 'uploadthing/next';
+
+import { getUserData } from '@/actions/get-user-data';
 
 const f = createUploadthing();
 
@@ -11,10 +11,7 @@ const currUser = async () => {
 
 export const ourFileRouter = {
   workspaceImage: f({
-    image: {
-      maxFileSize: "4MB",
-      maxFileCount: 1,
-    },
+    image: { maxFileSize: '4MB', maxFileCount: 1 },
   })
     .middleware(() => currUser())
     .onUploadComplete(() => {}),

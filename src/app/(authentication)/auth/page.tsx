@@ -52,10 +52,10 @@ const AuthPage = () => {
       <div className="max-w-[450px]">
         <div className="flex justify-center items-center gap-3 mb-4">
           <BsSlack size={30} />
-          <Typography text="Linka" variant="h2" />
+          <Typography text="TeamCom" variant="h2" />
         </div>
 
-        <Typography text="Sign in to Linka" variant="h2" className="mb-3" />
+        <Typography text="Sign in to TeamCom" variant="h2" className="mb-3" />
 
         <Typography
           text="We suggest using the email address that you use at work"

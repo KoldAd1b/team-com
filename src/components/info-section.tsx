@@ -34,15 +34,15 @@ const InfoSection: FC<{
   const router = useRouter();
 
   let backgroundColor = "bg-primary-light";
-  if (color === "green") {
-    backgroundColor = "bg-green-900";
+  if (color === "red") {
+    backgroundColor = "bg-red-600";
   } else if (color === "blue") {
     backgroundColor = "bg-blue-900";
   }
 
   let secondayBg = "bg-primary-dark";
-  if (color === "green") {
-    secondayBg = "bg-green-700";
+  if (color === "red") {
+    secondayBg = "bg-red-400";
   } else if (color === "blue") {
     secondayBg = "bg-blue-700";
   }

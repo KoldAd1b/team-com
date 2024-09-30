@@ -11,8 +11,8 @@ const MainContent: FC<{ children: ReactNode }> = ({ children }) => {
   const { color } = useColorPrefrences();
 
   let backgroundColor = "bg-primary-dark";
-  if (color === "green") {
-    backgroundColor = "bg-green-700";
+  if (color === "red") {
+    backgroundColor = "bg-red-700";
   } else if (color === "blue") {
     backgroundColor = "bg-blue-700";
   }

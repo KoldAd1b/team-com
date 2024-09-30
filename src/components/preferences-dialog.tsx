@@ -47,7 +47,7 @@ const PreferencesDialog = () => {
             <Typography
               variant="p"
               className="pb-4"
-              text="Choose if Linka's appearance should be light or dark, or follow the computer settings"
+              text="Choose if TeamCom's appearance should be light or dark, or follow the computer settings"
             />
             <div className="flex flex-wrap gap-3">
               <Button
@@ -91,10 +91,10 @@ const PreferencesDialog = () => {
             <div className="flex flex-wrap gap-5">
               <Button
                 variant="outline"
-                onClick={() => selectColor("green")}
-                className="w-full hover:border-green-800 border-2"
+                onClick={() => selectColor("red")}
+                className="w-full hover:border-red-800 border-2"
               >
-                Green
+                Red
               </Button>
               <Button
                 variant="outline"
