@@ -1,4 +1,4 @@
-import { SockerIoApiResponse } from "@/types/app";
+import { SocketIoApiResponse } from "@/types/app";
 import { NextApiRequest } from "next";
 
 import { getUserDataPages } from "@/actions/get-user-data";
@@ -6,7 +6,7 @@ import supabaseServerClientPages from "@/supabase/supabaseServerPages";
 
 export default async function handler(
   req: NextApiRequest,
-  res: SockerIoApiResponse
+  res: SocketIoApiResponse
 ) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });

@@ -1,16 +1,16 @@
-import { ElementRef, FC, useRef } from 'react';
-import { format } from 'date-fns';
+import { ElementRef, FC, useRef } from "react";
+import { format } from "date-fns";
 
-import { Channel, User, Workspace } from '@/types/app';
-import { useChatFetcher } from '@/hooks/use-chat-fetcher';
-import DotAnimatedLoader from '@/components/dot-animated-loader';
-import ChatItem from '@/components/chat-item';
-import { useChatSocketConnection } from '@/hooks/use-chat-socket-connection';
-import IntroBanner from '@/components/intro-banner';
-import { Button } from '@/components/ui/button';
-import { useChatScrollHandler } from '@/hooks/use-chat-scroll-handler';
+import { Channel, User, Workspace } from "@/types/app";
+import { useChatFetcher } from "@/hooks/use-chat-fetcher";
+import DotAnimatedLoader from "@/components/dot-animated-loader";
+import ChatItem from "@/components/chat-item";
+import { useChatSocketConnection } from "@/hooks/use-chat-socket-connection";
+import IntroBanner from "@/components/intro-banner";
+import { Button } from "@/components/ui/button";
+import { useChatScrollHandler } from "@/hooks/use-chat-scroll-handler";
 
-const DATE_FORMAT = 'd MMM yyy, HH:mm';
+const DATE_FORMAT = "d MMM yyy, HH:mm";
 
 type ChatMessagesProps = {
   userData: User;
@@ -19,9 +19,9 @@ type ChatMessagesProps = {
   apiUrl: string;
   socketUrl: string;
   socketQuery: Record<string, string>;
-  paramKey: 'channelId' | 'recipientId';
+  paramKey: "channelId" | "recipientId";
   paramValue: string;
-  type: 'Channel' | 'DirectMessage';
+  type: "Channel" | "DirectMessage";
   workspaceData: Workspace;
   channelData?: Channel;
 };
@@ -39,11 +39,11 @@ const ChatMessages: FC<ChatMessagesProps> = ({
   workspaceData,
   channelData,
 }) => {
-  const chatRef = useRef<ElementRef<'div'>>(null);
-  const bottomRef = useRef<ElementRef<'div'>>(null);
+  const chatRef = useRef<ElementRef<"div">>(null);
+  const bottomRef = useRef<ElementRef<"div">>(null);
 
   const queryKey =
-    type === 'Channel' ? `channel:${chatId}` : `direct_message:${chatId}`;
+    type === "Channel" ? `channel:${chatId}` : `direct_message:${chatId}`;
 
   const { data, status, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useChatFetcher({
@@ -57,14 +57,15 @@ const ChatMessages: FC<ChatMessagesProps> = ({
   useChatSocketConnection({
     queryKey,
     addKey:
-      type === 'Channel'
+      type === "Channel"
         ? `${queryKey}:channel-messages`
         : `direct_messages:post`,
     updateKey:
-      type === 'Channel'
-        ? `${queryKey}:channel-messaegs:update`
+      type === "Channel"
+        ? `${queryKey}:channel-messages:update`
         : `direct_messages:update`,
     paramValue,
+    currentUser: userData,
   });
 
   useChatScrollHandler({
@@ -73,17 +74,17 @@ const ChatMessages: FC<ChatMessagesProps> = ({
     count: data?.pages?.[0].data?.length ?? 0,
   });
 
-  if (status === 'pending') {
+  if (status === "pending") {
     return <DotAnimatedLoader />;
   }
 
-  if (status === 'error') {
+  if (status === "error") {
     return <div>Error Occured</div>;
   }
 
   const renderMessages = () =>
-    data.pages.map(page =>
-      page.data.map(message => (
+    data.pages.map((page) =>
+      page.data.map((message) => (
         <ChatItem
           key={message.id}
           currentUser={userData}
@@ -102,7 +103,7 @@ const ChatMessages: FC<ChatMessagesProps> = ({
     );
 
   return (
-    <div ref={chatRef} className='flex-1 flex flex-col py-4 overflow-y-auto'>
+    <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
       {!hasNextPage && (
         <IntroBanner
           type={type}
@@ -111,17 +112,17 @@ const ChatMessages: FC<ChatMessagesProps> = ({
         />
       )}
       {hasNextPage && (
-        <div className='flex justify-center'>
+        <div className="flex justify-center">
           {isFetchingNextPage ? (
             <DotAnimatedLoader />
           ) : (
-            <Button variant='link' onClick={() => fetchNextPage()}>
+            <Button variant="link" onClick={() => fetchNextPage()}>
               Load Previous Messages
             </Button>
           )}
         </div>
       )}
-      <div className='flex flex-col-reverse mt-auto'>{renderMessages()}</div>
+      <div className="flex flex-col-reverse mt-auto">{renderMessages()}</div>
       <div ref={bottomRef} />
     </div>
   );

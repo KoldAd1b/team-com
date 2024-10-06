@@ -179,7 +179,7 @@ const Sidebar: FC<SidebarProps> = ({
                         </div>
                         <Typography
                           variant="p"
-                          text={`Sign out of ${currentWorkspaceData.name}`}
+                          text={`Sign out`}
                           className="hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer"
                         />
                       </div>

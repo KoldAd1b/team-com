@@ -24,6 +24,8 @@ export async function GET(req: Request) {
 
     if (!recipientId) return new NextResponse("Bad Request", { status: 400 });
 
+    console.log(recipientId);
+
     const page = Number(searchParams.get("page"));
     const size = Number(searchParams.get("size"));
 

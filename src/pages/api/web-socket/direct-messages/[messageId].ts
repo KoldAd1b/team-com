@@ -1,13 +1,13 @@
 import { NextApiRequest } from "next";
 
-import { SockerIoApiResponse } from "@/types/app";
+import { SocketIoApiResponse } from "@/types/app";
 import { getUserDataPages } from "@/actions/get-user-data";
 import supabaseServerClientPages from "@/supabase/supabaseServerPages";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export default async function handler(
   req: NextApiRequest,
-  res: SockerIoApiResponse
+  res: SocketIoApiResponse
 ) {
   if (!["DELETE", "PATCH"].includes(req.method!)) {
     return res.status(405).json({ error: "Method not allowed" });

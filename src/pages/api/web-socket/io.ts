@@ -1,25 +1,22 @@
 import { NextApiRequest } from "next";
 import { Server as NetServer } from "http";
-import { Server as SockerServer } from "socket.io";
+import { Server as SocketServer } from "socket.io";
 
-import { SockerIoApiResponse } from "@/types/app";
+import { SocketIoApiResponse } from "@/types/app";
 
-const initializeSocketServer = (httpServer: NetServer): SockerServer => {
-  const path = "/api/web-socket/io";
-  return new SockerServer(httpServer, {
-    path,
-    addTrailingSlash: false,
-  });
-};
-
-const handler = async (req: NextApiRequest, res: SockerIoApiResponse) => {
+const ioHandler = (req: NextApiRequest, res: SocketIoApiResponse) => {
   if (!res.socket.server.io) {
-    res.socket.server.io = initializeSocketServer(
-      res.socket.server.io as unknown as NetServer
-    );
+    const path = "/api/socket/io";
+    const httpServer: NetServer = res.socket.server as any;
+    const io = new SocketServer(httpServer, {
+      path: path,
+      // @ts-ignore
+      addTrailingSlash: false,
+    });
+    res.socket.server.io = io;
   }
 
   res.end();
 };
 
-export default handler;
+export default ioHandler;

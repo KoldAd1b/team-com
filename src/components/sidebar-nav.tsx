@@ -104,7 +104,7 @@ const SidebarNav: FC<SidebarNavProps> = ({
                               <AvatarImage
                                 src={workspace.image_url || ""}
                                 alt={workspace.name}
-                                className="object-cover w-full h-full"
+                                className="object-cover w-full h-full bg-black "
                               />
                               <AvatarFallback>
                                 <Typography

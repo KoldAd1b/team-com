@@ -1,25 +1,26 @@
-'use client';
+"use client";
 
-import { FC, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { FC, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-import Sidebar from '@/components/sidebar';
-import { Channel, User, Workspace } from '@/types/app';
-import InfoSection from '@/components/info-section';
-import ChatHeader from '@/components/chat-header';
-import TextEditor from '@/components/text-editor';
-import ChatMessages from '@/components/chat-messages';
-import SearchBar from '@/components/search-bar';
-import VideoChat from './video-chat';
+import Sidebar from "@/components/sidebar";
+import { Channel, User, Workspace } from "@/types/app";
+import InfoSection from "@/components/info-section";
+import ChatHeader from "@/components/chat-header";
+import TextEditor from "@/components/text-editor";
+import ChatMessages from "@/components/chat-messages";
+import SearchBar from "@/components/search-bar";
+import VideoChat from "./video-chat";
+import { supabaseBrowserClient } from "@/supabase/supabaseClient";
 
 type ChatGroupProps = {
-  type: 'Channel' | 'DirectMessage';
+  type: "Channel" | "DirectMessage";
   socketUrl: string;
   apiUrl: string;
   headerTitle: string;
   chatId: string;
   socketQuery: Record<string, string>;
-  paramKey: 'channelId' | 'recipientId';
+  paramKey: "channelId" | "recipientId";
   paramValue: string;
   userData: User;
   currentWorkspaceData: Workspace;
@@ -49,13 +50,21 @@ const ChatGroup: FC<ChatGroupProps> = ({
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const callParam = searchParams?.get('call');
-    setIsVideoCall(callParam === 'true');
+    const getUserToken = async () => {
+      const supabaseClient = supabaseBrowserClient;
+      const {
+        data: { session },
+        error,
+      } = await supabaseClient.auth.getSession();
+      const token = session?.access_token;
+    };
+    const callParam = searchParams?.get("call");
+    setIsVideoCall(callParam === "true");
   }, [searchParams, chatId]);
 
   return (
     <>
-      <div className='h-[calc(100vh-256px)] overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-[6px] [&::-webkit-scrollbar-thumb]:bg-foreground/60 [&::-webkit-scrollbar-track]:bg-none [&::-webkit-scrollbar]:w-2'>
+      <div className="h-[calc(100vh-256px)] overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-[6px] [&::-webkit-scrollbar-thumb]:bg-foreground/60 [&::-webkit-scrollbar-track]:bg-none [&::-webkit-scrollbar]:w-2">
         <Sidebar
           currentWorkspaceData={currentWorkspaceData}
           userData={userData}
@@ -66,7 +75,7 @@ const ChatGroup: FC<ChatGroupProps> = ({
           userData={userData}
           userWorkspaceChannels={userWorkspaceChannels}
           currentChannelId={
-            type === 'Channel' ? currentChannelData?.id : undefined
+            type === "Channel" ? currentChannelData?.id : undefined
           }
         />
         <SearchBar
@@ -74,14 +83,14 @@ const ChatGroup: FC<ChatGroupProps> = ({
           currentChannelData={currentChannelData}
           loggedInUserId={userData.id}
         />
-        <div className='p-4 relative w-full overflow-hidden'>
+        <div className="p-4 relative w-full overflow-hidden">
           <ChatHeader title={headerTitle} chatId={chatId} userData={userData} />
 
-          <div className='mt-10'>
+          <div className="mt-10">
             {!isVideoCall && (
               <ChatMessages
                 userData={userData}
-                name={currentChannelData?.name ?? 'USERNAME'}
+                name={currentChannelData?.name ?? "USERNAME"}
                 workspaceData={currentWorkspaceData}
                 chatId={chatId}
                 type={type}
@@ -95,14 +104,14 @@ const ChatGroup: FC<ChatGroupProps> = ({
             )}
             {isVideoCall && (
               <VideoChat
-                chatId={type === 'Channel' ? currentChannelData?.id! : chatId}
+                chatId={type === "Channel" ? currentChannelData?.id! : chatId}
                 userData={userData}
               />
             )}
           </div>
         </div>
       </div>
-      <div className='m-4'>
+      <div className="m-4">
         {!isVideoCall && (
           <TextEditor
             apiUrl={socketUrl}
@@ -110,7 +119,7 @@ const ChatGroup: FC<ChatGroupProps> = ({
             type={type}
             userData={userData}
             workspaceData={currentWorkspaceData}
-            recipientId={type === 'DirectMessage' ? chatId : undefined}
+            recipientId={type === "DirectMessage" ? chatId : undefined}
           />
         )}
       </div>

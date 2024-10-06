@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useSocket } from "@/provider/web-socket";
-import { MessageWithUser } from "@/types/app";
+import { MessageWithUser, User } from "@/types/app";
 import { useEffect } from "react";
 
 type UseChatSocketConnectionProps = {
@@ -9,6 +9,7 @@ type UseChatSocketConnectionProps = {
   queryKey: string;
   updateKey: string;
   paramValue: string;
+  currentUser: User;
 };
 
 export const useChatSocketConnection = ({
@@ -16,6 +17,7 @@ export const useChatSocketConnection = ({
   paramValue,
   updateKey,
   queryKey,
+  currentUser,
 }: UseChatSocketConnectionProps) => {
   const { socket } = useSocket();
   const queryClient = useQueryClient();
