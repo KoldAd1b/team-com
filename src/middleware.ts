@@ -14,6 +14,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - Excluding the web-socket io to prevent unnecessary auth requests
      */
-    "/((?!_next/static|_next/image|favicon.ico|api/web-socket/io|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api/web-socket/io|auth|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

@@ -27,6 +27,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Typography from "@/components/ui/typography";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import PreferencesDialog from "@/components/preferences-dialog";
+import { supabaseBrowserClient } from "@/supabase/supabaseClient";
 
 type SidebarProps = {
   userWorksapcesData: Workspace[];
@@ -40,6 +41,11 @@ const Sidebar: FC<SidebarProps> = ({
   userData,
 }) => {
   const { color } = useColorPrefrences();
+  const supabase = supabaseBrowserClient;
+
+  const logout = async () => {
+    await supabase.auth.signOut();
+  };
 
   let backgroundColor = "bg-primary-dark";
   if (color === "red") {
@@ -68,6 +74,7 @@ const Sidebar: FC<SidebarProps> = ({
       <SidebarNav
         currentWorkspaceData={currentWorkspaceData}
         userWorkspacesData={userWorksapcesData}
+        logout={logout}
       />
 
       <div className="flex flex-col space-y-3">
@@ -177,11 +184,13 @@ const Sidebar: FC<SidebarProps> = ({
                             className="text-xs"
                           />
                         </div>
-                        <Typography
-                          variant="p"
-                          text={`Sign out`}
-                          className="hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer"
-                        />
+                        <div onClick={logout}>
+                          <Typography
+                            variant="p"
+                            text={`Sign out`}
+                            className="hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer"
+                          />
+                        </div>
                       </div>
                     </div>
                   </PopoverContent>

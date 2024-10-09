@@ -50,14 +50,6 @@ const ChatGroup: FC<ChatGroupProps> = ({
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const getUserToken = async () => {
-      const supabaseClient = supabaseBrowserClient;
-      const {
-        data: { session },
-        error,
-      } = await supabaseClient.auth.getSession();
-      const token = session?.access_token;
-    };
     const callParam = searchParams?.get("call");
     setIsVideoCall(callParam === "true");
   }, [searchParams, chatId]);

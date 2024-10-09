@@ -24,6 +24,8 @@ export async function GET(req: Request) {
 
     if (!recipientId) return new NextResponse("Bad Request", { status: 400 });
 
+    console.log(userId);
+
     console.log(recipientId);
 
     const page = Number(searchParams.get("page"));
@@ -35,11 +37,12 @@ export async function GET(req: Request) {
       .from("direct_messages")
       .select(`*, user_one:user_one (*), user_two:user_two (*), user: user (*)`)
       .or(
-        `and(user_one.eq.${userId}), user_two.eq.${recipientId}, and(user_one.eq.${recipientId}), user_two.eq.${userId})`
+        `and(user_one.eq.${userId}, user_two.eq.${recipientId}), and(user_one.eq.${recipientId}, user_two.eq.${userId})`
       )
       .range(from, to)
       .order("created_at", { ascending: true });
 
+    console.log(data);
     if (error) {
       console.error("Error fetching direct messages", error);
       return new NextResponse("Internal Server Error", { status: 500 });

@@ -3,7 +3,7 @@
 import { FiPlus } from "react-icons/fi";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import PlaceHolder from "@tiptap/extension-placeholder";
 import { Send } from "lucide-react";
 import axios from "axios";
@@ -39,6 +39,7 @@ const TextEditor: FC<TextEditorProps> = ({
 }) => {
   const [content, setContent] = useState("");
   const [fileUploadModal, setFileUploadModal] = useState(false);
+  const editorRef = useRef();
 
   const toggleFileUploadModal = () =>
     setFileUploadModal((prevState) => !prevState);
@@ -90,6 +91,7 @@ const TextEditor: FC<TextEditorProps> = ({
       </div>
       <div className="h-[150px] pt-11 flex w-full grow-1">
         <EditorContent
+          onClick={() => editor?.commands.focus()}
           className="prose w-full h-[150px] dark:text-white leading-[1.15px] overflow-y-hidden whitespace-pre-wrap"
           editor={editor}
         />

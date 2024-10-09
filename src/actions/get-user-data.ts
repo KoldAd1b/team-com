@@ -7,10 +7,9 @@ import { createClient } from "@/supabase/supabaseServer";
 export const getUserData = async (): Promise<User | null> => {
   const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: userData } = await supabase.auth.getSession();
 
+  const user = userData.session?.user;
   if (!user) {
     console.log("NO USER", user);
     return null;
@@ -35,11 +34,11 @@ export const getUserDataPages = async (
 ): Promise<User | null> => {
   const supabase = supabaseServerClientPages(req, res);
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: userData } = await supabase.auth.getSession();
 
-  if (!user) {
+  const user = userData.session?.user;
+
+  if (!userData) {
     console.log("NO USER", user);
     return null;
   }
@@ -47,7 +46,7 @@ export const getUserDataPages = async (
   const { data, error } = await supabase
     .from("users")
     .select("*")
-    .eq("id", user.id);
+    .eq("id", user?.id);
 
   if (error) {
     console.log(error);

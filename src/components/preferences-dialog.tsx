@@ -105,7 +105,7 @@ const PreferencesDialog = () => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => selectColor("")}
+                onClick={() => selectColor("red")}
                 className="w-full hover:border-red-800 border-2"
               >
                 Reset
