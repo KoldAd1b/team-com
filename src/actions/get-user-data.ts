@@ -1,20 +1,28 @@
-import { NextApiRequest, NextApiResponse } from "next";
-
-import { User } from "@/types/app";
-import supabaseServerClientPages from "@/supabase/supabaseServerPages";
 import { createClient } from "@/supabase/supabaseServer";
+import supabaseServerClientPages from "@/supabase/supabaseServerPages";
+import { User } from "@/types/app";
+import { NextApiRequest, NextApiResponse } from "next";
+import { getCookieData } from "@/lib/get-cookie-data";
+
+type userPayloadType = {
+  id: string;
+  email: string;
+  name: string;
+};
 
 export const getUserData = async (): Promise<User | null> => {
-  const supabase = createClient();
+  // Get the user info from the verified JWT
+  const userPayload = await getCookieData();
 
-  const { data: userData } = await supabase.auth.getSession();
-
-  const user = userData.session?.user;
-  if (!user) {
-    console.log("NO USER", user);
+  if (!userPayload) {
+    console.log("No valid JWT found");
     return null;
   }
 
+  const user = userPayload.user as userPayloadType;
+  const supabase = createClient();
+
+  // Assuming userPayload contains the user ID
   const { data, error } = await supabase
     .from("users")
     .select("*")
@@ -34,14 +42,14 @@ export const getUserDataPages = async (
 ): Promise<User | null> => {
   const supabase = supabaseServerClientPages(req, res);
 
-  const { data: userData } = await supabase.auth.getSession();
+  const userPayload = await getCookieData();
 
-  const user = userData.session?.user;
-
-  if (!userData) {
-    console.log("NO USER", user);
+  if (!userPayload) {
+    console.log("No valid JWT found");
     return null;
   }
+
+  const user = userPayload.user as userPayloadType;
 
   const { data, error } = await supabase
     .from("users")

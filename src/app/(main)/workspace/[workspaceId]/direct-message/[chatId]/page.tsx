@@ -33,26 +33,28 @@ const DirectMessage = async ({
 
   return (
     <div className="hidden md:block">
-      <ChatGroup
-        userData={userData}
-        type="DirectMessage"
-        currentChannelData={currentChannelData}
-        currentWorkspaceData={currentWorkspaceData}
-        userWorkspaceData={userWorkspacesData as Workspace[]}
-        slug={workspaceId}
-        userWorkspaceChannels={userWorkspaceChannels}
-        chatId={chatId}
-        socketUrl="/api/web-socket/direct-messages"
-        socketQuery={{
-          channelId: currentChannelData?.id!,
-          workspaceId: currentWorkspaceData.id,
-          recipientId: chatId,
-        }}
-        apiUrl="/api/direct-messages"
-        headerTitle={"DIRECT MESSAGE"}
-        paramKey="recipientId"
-        paramValue={chatId}
-      />
+      {
+        <ChatGroup
+          userData={userData}
+          type="DirectMessage"
+          currentChannelData={currentChannelData}
+          currentWorkspaceData={currentWorkspaceData}
+          userWorkspaceData={userWorkspacesData as Workspace[]}
+          slug={workspaceId}
+          userWorkspaceChannels={userWorkspaceChannels}
+          chatId={chatId}
+          socketUrl="/api/web-socket/direct-messages"
+          socketQuery={{
+            channelId: currentChannelData?.id!,
+            workspaceId: currentWorkspaceData.id,
+            recipientId: chatId,
+          }}
+          apiUrl="/api/direct-messages"
+          headerTitle={"DIRECT MESSAGE"}
+          paramKey="recipientId"
+          paramValue={chatId}
+        />
+      }
     </div>
   );
 };

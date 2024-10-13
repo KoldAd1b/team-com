@@ -63,6 +63,7 @@ const CreateChannelDialog: FC<{
       form.reset();
       toast.success("Channel created successfully");
     } catch (error) {
+      console.error(error);
       setIsSubmitting(false);
     }
   };

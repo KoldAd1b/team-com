@@ -17,7 +17,6 @@ export const useChatSocketConnection = ({
   paramValue,
   updateKey,
   queryKey,
-  currentUser,
 }: UseChatSocketConnectionProps) => {
   const { socket } = useSocket();
   const queryClient = useQueryClient();

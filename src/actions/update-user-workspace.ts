@@ -3,8 +3,8 @@
 import { createClient } from "@/supabase/supabaseServer";
 
 export const updateUserWorkspace = async (
-  userId: string,
-  workspaceId: string
+  userId?: string,
+  workspaceId?: string
 ) => {
   const supabase = createClient();
 

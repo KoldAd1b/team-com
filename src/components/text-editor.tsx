@@ -39,7 +39,6 @@ const TextEditor: FC<TextEditorProps> = ({
 }) => {
   const [content, setContent] = useState("");
   const [fileUploadModal, setFileUploadModal] = useState(false);
-  const editorRef = useRef();
 
   const toggleFileUploadModal = () =>
     setFileUploadModal((prevState) => !prevState);

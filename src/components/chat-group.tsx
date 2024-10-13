@@ -11,7 +11,6 @@ import TextEditor from "@/components/text-editor";
 import ChatMessages from "@/components/chat-messages";
 import SearchBar from "@/components/search-bar";
 import VideoChat from "./video-chat";
-import { supabaseBrowserClient } from "@/supabase/supabaseClient";
 
 type ChatGroupProps = {
   type: "Channel" | "DirectMessage";
@@ -41,7 +40,6 @@ const ChatGroup: FC<ChatGroupProps> = ({
   type,
   currentChannelData,
   currentWorkspaceData,
-  slug,
   userData,
   userWorkspaceChannels,
   userWorkspaceData,
@@ -82,7 +80,7 @@ const ChatGroup: FC<ChatGroupProps> = ({
             {!isVideoCall && (
               <ChatMessages
                 userData={userData}
-                name={currentChannelData?.name ?? "USERNAME"}
+                name={currentChannelData?.name! ?? "USERNAME"}
                 workspaceData={currentWorkspaceData}
                 chatId={chatId}
                 type={type}
@@ -96,6 +94,7 @@ const ChatGroup: FC<ChatGroupProps> = ({
             )}
             {isVideoCall && (
               <VideoChat
+                // @ts-nocheck
                 chatId={type === "Channel" ? currentChannelData?.id! : chatId}
                 userData={userData}
               />

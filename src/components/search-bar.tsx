@@ -116,12 +116,12 @@ const SearchBar: FC<SearchBarProps> = ({
                           className="text-[10px]"
                           size="sm"
                           variant="destructive"
-                          onClick={() =>
+                          onClick={() => {
                             makeUserRegulator(
                               member.id,
                               currentChannelData?.id!
-                            )
-                          }
+                            );
+                          }}
                         >
                           Assign Regulator
                         </Button>

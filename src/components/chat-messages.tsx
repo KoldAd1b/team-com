@@ -36,7 +36,6 @@ const ChatMessages: FC<ChatMessagesProps> = ({
   socketUrl,
   type,
   userData,
-  workspaceData,
   channelData,
 }) => {
   const chatRef = useRef<ElementRef<"div">>(null);
@@ -104,11 +103,11 @@ const ChatMessages: FC<ChatMessagesProps> = ({
 
   return (
     <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
-      {!hasNextPage && (
+      {!hasNextPage && channelData && (
         <IntroBanner
           type={type}
           name={name}
-          creationDate={channelData?.created_at!}
+          creationDate={channelData?.created_at}
         />
       )}
       {hasNextPage && (

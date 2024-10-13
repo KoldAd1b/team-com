@@ -1,8 +1,8 @@
 import { createClient } from "@/supabase/supabaseServer";
 
 export const addMemberToWorkspace = async (
-  userId: string,
-  workspaceId: number
+  userId?: string,
+  workspaceId?: number
 ) => {
   const supabase = createClient();
 

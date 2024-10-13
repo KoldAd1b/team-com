@@ -5,9 +5,7 @@ import Image from "next/image";
 import React from "react";
 import { UploadDropzone } from "@/lib/uploadthing";
 
-type Props = {};
-
-const ImageUpload = (props: Props) => {
+const ImageUpload = () => {
   const { imageUrl, updateImageUrl } = useCreateWorkspaceValues();
 
   if (imageUrl) {

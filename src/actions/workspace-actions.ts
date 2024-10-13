@@ -84,7 +84,7 @@ export const workspaceInvite = async (inviteCode: string) => {
     return;
   }
 
-  await addMemberToWorkspace(userData?.id!, data?.id);
+  await addMemberToWorkspace(userData?.id, data?.id);
 
-  await updateUserWorkspace(userData?.id!, data?.id);
+  await updateUserWorkspace(userData?.id, data?.id);
 };

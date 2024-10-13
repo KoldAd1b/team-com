@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 type ChatHeaderProp = { title: string; chatId: string; userData: User };
 
-const ChatHeader: FC<ChatHeaderProp> = ({ title, chatId, userData }) => {
+const ChatHeader: FC<ChatHeaderProp> = ({ title }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 

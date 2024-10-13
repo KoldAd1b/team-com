@@ -23,13 +23,12 @@ import { toast } from "sonner";
 type SidebarNavProps = {
   userWorkspacesData: Workspace[];
   currentWorkspaceData: Workspace;
-  logout: () => {};
+  logout: () => void;
 };
 
 const SidebarNav: FC<SidebarNavProps> = ({
   currentWorkspaceData,
   userWorkspacesData,
-  logout,
 }) => {
   const router = useRouter();
   const [switchingWorkspace, setSwitchingWorkspace] = useState(false);

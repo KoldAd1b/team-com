@@ -45,8 +45,8 @@ export default async function handler(
 
     // type in ('user', 'admin', 'regulator')
     const isMessageOwner = messageData.user_id === userData.id;
-    const isAdmin = userData.type === "admin";
-    const isRegulator = userData.type === "regulator";
+    // const isAdmin = userData.type === "admin";
+    // const isRegulator = userData.type === "regulator";
 
     const canEditMessage = isMessageOwner || !messageData.is_deleted;
 

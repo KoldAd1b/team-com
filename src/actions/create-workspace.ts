@@ -38,7 +38,7 @@ export const createWorkspace = async ({
     return { error };
   }
 
-  const [updateWorkspaceData, updateWorkspaceError] = await updateUserWorkspace(
+  const [, updateWorkspaceError] = await updateUserWorkspace(
     userData.id,
     workspaceRecord[0].id
   );
@@ -48,8 +48,10 @@ export const createWorkspace = async ({
   }
 
   //   Add user to workspace members
-  const [addMemberToWorkspaceData, addMemberToWorkspaceError] =
-    await addMemberToWorkspace(userData.id, workspaceRecord[0].id);
+  const [, addMemberToWorkspaceError] = await addMemberToWorkspace(
+    userData.id,
+    workspaceRecord[0].id
+  );
 
   if (addMemberToWorkspaceError) {
     return { error: addMemberToWorkspaceError };

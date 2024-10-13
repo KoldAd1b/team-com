@@ -10,7 +10,6 @@ const ioHandler = (req: NextApiRequest, res: SocketIoApiResponse) => {
     const httpServer: NetServer = res.socket.server as any;
     const io = new SocketServer(httpServer, {
       path: path,
-      // @ts-ignore
       addTrailingSlash: false,
     });
     res.socket.server.io = io;

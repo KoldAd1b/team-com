@@ -3,7 +3,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSocket } from "@/provider/web-socket";
 import { MessageWithUser } from "@/types/app";
 import axios from "axios";
-import { createBrowserClient } from "@supabase/ssr";
 import { supabaseBrowserClient } from "@/supabase/supabaseClient";
 
 type ChatFetcherProps = {
