@@ -2,7 +2,7 @@ import { createClient } from "@/supabase/supabaseServer";
 import supabaseServerClientPages from "@/supabase/supabaseServerPages";
 import { User } from "@/types/app";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getCookieData } from "@/lib/get-cookie-data";
+import { getCookieData, getCookieDataPages } from "@/lib/get-cookie-data";
 
 type userPayloadType = {
   id: string;
@@ -42,7 +42,7 @@ export const getUserDataPages = async (
 ): Promise<User | null> => {
   const supabase = supabaseServerClientPages(req, res);
 
-  const userPayload = await getCookieData();
+  const userPayload = await getCookieDataPages(req);
 
   if (!userPayload) {
     console.log("No valid JWT found");

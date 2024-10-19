@@ -10,7 +10,8 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
+import dynamic from "next/dynamic";
+
 import { BsEmojiSmile } from "react-icons/bs";
 
 import Typography from "@/components/ui/typography";
@@ -19,6 +20,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+const Picker = dynamic(() => import("@emoji-mart/react"), { ssr: false });
 
 const MenuBar = ({ editor }: { editor: Editor }) => {
   const { resolvedTheme } = useTheme();

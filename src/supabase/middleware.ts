@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { jwtVerify, SignJWT } from "jose"; // Using jose for JWT handling
 
-const USER_COOKIE_NAME = "sb-access-token";
+export const USER_COOKIE_NAME = "sb-access-token";
 const JWT_SECRET_KEY = new TextEncoder().encode(
   process.env.SUPABASE_JWT_SECRET!
 ); // Secret key for signing

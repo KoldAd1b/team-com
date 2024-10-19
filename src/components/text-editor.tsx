@@ -3,7 +3,7 @@
 import { FiPlus } from "react-icons/fi";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import PlaceHolder from "@tiptap/extension-placeholder";
 import { Send } from "lucide-react";
 import axios from "axios";

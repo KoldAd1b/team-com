@@ -41,10 +41,15 @@ const Sidebar: FC<SidebarProps> = ({
   userData,
 }) => {
   const { color } = useColorPrefrences();
+
   const supabase = supabaseBrowserClient;
 
   const logout = async () => {
     await supabase.auth.signOut();
+    const response = await fetch("/api/logout", {
+      method: "POST",
+    });
+    window.location.href = "/auth";
   };
 
   let backgroundColor = "bg-primary-dark";

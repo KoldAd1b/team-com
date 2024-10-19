@@ -1,5 +1,6 @@
 import { getUserData } from "@/actions/get-user-data";
 import { createClient } from "@/supabase/supabaseServer";
+import { unstable_noStore } from "next/cache";
 import { NextResponse } from "next/server";
 
 function getPagination(page: number, size: number) {
@@ -12,6 +13,7 @@ function getPagination(page: number, size: number) {
 
 export async function GET(req: Request) {
   try {
+    unstable_noStore();
     const supabase = createClient();
     const userData = await getUserData();
     const { searchParams } = new URL(req.url);

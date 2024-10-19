@@ -7,10 +7,15 @@ import Sidebar from "@/components/sidebar";
 import { Channel, User, Workspace } from "@/types/app";
 import InfoSection from "@/components/info-section";
 import ChatHeader from "@/components/chat-header";
-import TextEditor from "@/components/text-editor";
+
 import ChatMessages from "@/components/chat-messages";
 import SearchBar from "@/components/search-bar";
-import VideoChat from "./video-chat";
+import dynamic from "next/dynamic";
+
+const VideoChat = dynamic(() => import("./video-chat"), { ssr: false });
+const TextEditor = dynamic(() => import("@/components/text-editor"), {
+  ssr: false,
+});
 
 type ChatGroupProps = {
   type: "Channel" | "DirectMessage";
